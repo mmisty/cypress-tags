@@ -1,4 +1,4 @@
-import { parseInlineTags, removeTagsFromTitle, uniqTags } from 'cy-local/utils/tags';
+import { parseInlineTags, removeTagsFromTitle, uniqTags } from '../utils/tags';
 import GrepTagObject = Mocha.GrepTagObject;
 
 export const origins = () => ({
