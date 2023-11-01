@@ -49,7 +49,7 @@
     "publish:patch": "export TAG=latest && export ver=$(semver $(npm show . version) --increment -i patch) && npm run publishPack && npm run postpublish",
     "publish:minor": "export TAG=latest && export ver=$(semver $(npm show . version) --increment -i minor) && npm run publishPack && npm run postpublish",
     "publish:major": "export TAG=latest && export ver=$(semver $(npm show . version) --increment -i major) && npm run publishPack && npm run postpublish",
-    "publish:pack": "export TAG=latest && export ver=\"1.0.1\" && npm run publishPack && npm run postpublish"
+    "publish:pack": "export TAG=alpha && export ver=\"1.0.3-alpha\" && npm run publishPack && npm run postpublish"
   },
   "overrides": {
     "loader-utils": "1.4.2"
