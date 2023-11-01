@@ -1,0 +1,6 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+#nvm use 16
+# echo --- lint ---
+#npm run lint
