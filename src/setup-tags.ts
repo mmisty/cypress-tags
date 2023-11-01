@@ -3,6 +3,4 @@
 
 // here export only functions to run in browser
 
-import { registerTags } from './setup-tags';
-
-registerTags();
+export { registerTags } from './setup';

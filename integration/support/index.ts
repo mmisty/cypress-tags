@@ -1,5 +1,5 @@
-import { myPluginSetup } from 'cy-local';
 import { COVERAGE } from '../common/constants';
+import 'cy-local';
 
 const setupCoverage = () => {
   if (Cypress.env(COVERAGE) === 'true' || Cypress.env(COVERAGE) === true) {
@@ -10,4 +10,4 @@ const setupCoverage = () => {
   }
 };
 setupCoverage();
-myPluginSetup();
+chai.config.truncateThreshold = 0;

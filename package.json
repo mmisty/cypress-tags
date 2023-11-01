@@ -1,28 +1,29 @@
 {
-  "name": "cypress-template",
+  "name": "@mmisty/cypress-tags",
   "version": "1.0.0",
-  "description": "cypress template to create cypress libraries with typescript / jest / code coverage",
+  "description": "Parses tags from test/suite title or/and from cypress configuration object into test .tags object",
   "main": "index.js",
-  "repository": "git@github.com:mmisty/cypress-template.git",
-  "homepage": "https://github.com/mmisty/cypress-template#readme",
+  "repository": "git@github.com:mmisty/cypress-tags.git",
+  "homepage": "https://github.com/mmisty/cypress-tags#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
+  "license": "Apache-2.0",
   "keywords": [
     "cypress",
     "e2e",
+    "tags",
     "tests",
-    "typescript",
-    "template"
+    "typescript"
   ],
   "author": "Taisia Pitko (mmisty) <minydas@yandex.ru>",
   "scripts": {
     "husky:install": "husky install",
     "lint": "eslint --fix '**/*.{ts,tsx,js}'",
     "test": "jest --reporters=default --reporters=jest-junit",
-    "test:cov": "jest --coverage --coverageDirectory reports/coverage-jest --reporters=default --reporters=jest-junit",
+    "test:cov": "jest --runInBand --coverage --coverageDirectory reports/coverage-jest --reporters=default --reporters=jest-junit",
     "cy": "cypress",
-    "cy:open": "npm run cy -- open",
+    "cy:open": "npm run cy -- open --e2e",
     "cy:run": "npm run cy -- run --browser chrome --headless",
     "cy:run:cov": "COVERAGE_REPORT_DIR=reports/coverage-cypress COVERAGE=true npm run cy -- run",
     "cy:open:cov": "COVERAGE_REPORT_DIR=reports/coverage-cypress COVERAGE=true npm run cy -- open",
@@ -41,7 +42,7 @@
     "pre": "rm -rf ./node_modules/.cache lib reports coverage-nyc .nyc_output && npm run lint && npm run build:all && npm run test:all && npm run cov:merge",
     "prepublishOnly": "{ echo \"Run script 'npm run publish:pack', 'npm run publish:minor', etc from package.json\n\"; exit 1; }",
     "postpublish": "git tag v$ver",
-    "pack": "npm run build && cp package.json ./lib/package.json && cp README.pack.md ./lib/README.md && cp CHANGELOG.md ./lib/CHANGELOG.md && sh .scripts/remove.sh && cd lib && npm version $ver --no-git-tag-version ",
+    "pack": "npm run build && cp package.json ./lib/package.json && cp README.md ./lib/README.md && cp CHANGELOG.md ./lib/CHANGELOG.md && sh .scripts/remove.sh && cd lib && npm version $ver --no-git-tag-version ",
     "prepublish": "npm run lint",
     "publishPack": "npm run pack && cd lib && npm publish",
     "publish:alpha": "export ver=$(semver $(npm show . version) --increment -i prerelease  --preid 'alpha') && npm run publishPack && npm run postpublish",
@@ -49,6 +50,9 @@
     "publish:minor": "export ver=$(semver $(npm show . version) --increment -i minor) && npm run publishPack && npm run postpublish",
     "publish:major": "export ver=$(semver $(npm show . version) --increment -i major) && npm run publishPack && npm run postpublish",
     "publish:pack": "export ver=\"0.0.2-alpha-2\" && npm run publishPack && npm run postpublish"
+  },
+  "overrides": {
+    "loader-utils": "1.4.2"
   },
   "jest-junit": {
     "suiteName": "jest tests",
@@ -68,7 +72,13 @@
     "@types/node": "^18.11.9",
     "@typescript-eslint/eslint-plugin": "^5.44.0",
     "@typescript-eslint/parser": "^5.44.0",
-    "cypress": "^13.0.0",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-eslint": "9.0.0",
+    "babel-loader": "8.0.5",
+    "babel-plugin-istanbul": "^5.1.1",
+    "babel-plugin-named-asset-import": "^0.3.1",
+    "babel-preset-react-app": "^7.0.2",
+    "cypress": "^13.4.0",
     "eslint": "^8.28.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-cypress": "^2.12.1",

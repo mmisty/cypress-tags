@@ -40,6 +40,17 @@ export const preprocessor = (isCoverage: boolean) => {
           silent: true,
         }),
       ],
+      // fallback: {
+      //   util: require.resolve('util'),
+      //   path: require.resolve('path-browserify'),
+      //   url: false,
+      //   constants: false,
+      //   stream: false,
+      //   fs: false,
+      //   module: false,
+      //   process: require.resolve('./process'),
+      //   assert: false,
+      // },
     },
     module: {
       rules,
@@ -53,6 +64,10 @@ export const preprocessor = (isCoverage: boolean) => {
   const options = {
     webpackOptions,
   };
+
+  // const options = {
+  //   webpackOptions: require('./webpack.config.babel'),
+  // };
 
   return wp(options);
 };
