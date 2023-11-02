@@ -9,6 +9,7 @@
     "registry": "https://registry.npmjs.org/"
   },
   "license": "Apache-2.0",
+  "author": "Taisia Pitko (mmisty) <minydas@yandex.ru>",
   "keywords": [
     "cypress",
     "e2e",
@@ -16,7 +17,6 @@
     "tests",
     "typescript"
   ],
-  "author": "Taisia Pitko (mmisty) <minydas@yandex.ru>",
   "scripts": {
     "husky:install": "husky install",
     "lint": "eslint --fix '**/*.{ts,tsx,js}'",
@@ -50,9 +50,6 @@
     "publish:minor": "export TAG=latest && export ver=$(semver $(npm show . version) --increment -i minor) && npm run publishPack && npm run postpublish",
     "publish:major": "export TAG=latest && export ver=$(semver $(npm show . version) --increment -i major) && npm run publishPack && npm run postpublish",
     "publish:pack": "export TAG=alpha && export ver=\"1.0.3-alpha\" && npm run publishPack && npm run postpublish"
-  },
-  "overrides": {
-    "loader-utils": "1.4.2"
   },
   "jest-junit": {
     "suiteName": "jest tests",
@@ -100,6 +97,13 @@
     "tsconfig-paths-webpack-plugin": "^4.0.0",
     "typescript": "^4.9.3",
     "webpack": "^5.88.2"
+  },
+  "overrides": {
+    "loader-utils": "1.4.2"
+  },
+  "engines": {
+    "node": ">=16",
+    "npm": ">=8"
   },
   "volta": {
     "node": "16.16.0",

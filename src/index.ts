@@ -4,6 +4,7 @@
 /// <reference path="./mocha/index.ts" />
 // here export only functions to run in browser
 
-import { registerTags } from './setup-tags';
+// usage: import '@mmisty/cypress-tags';
+import { registerTags } from './setup';
 
 registerTags();

@@ -9,6 +9,5 @@
     "skipLibCheck": true,
     "types": ["node", "jest", "cypress", "jest-test-each"]
   },
-
   "include": ["./"]
 }
