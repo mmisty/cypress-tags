@@ -8,9 +8,9 @@ registerTags();
 describe('cyTagsShowTagsInTitle true', () => {
   describe('suite with tag @suiteTag("info")', () => {
     it('test @tag @skip("skip reason")', function () {
-      expect(this.test?.title).eq('test@tag @skip("skip reason") @suiteTag("info")');
+      expect(this.test?.title).eq('test@tag @skip("skip reason")');
       expect(this.test?.fullTitle()).eq(
-        'cyTagsShowTagsInTitle true suite with tag @suiteTag("info") test@tag @skip("skip reason") @suiteTag("info")',
+        'cyTagsShowTagsInTitle true suite with tag @suiteTag("info") test@tag @skip("skip reason")',
       );
     });
   });

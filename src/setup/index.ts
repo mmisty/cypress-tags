@@ -23,7 +23,7 @@ export const registerTags = () => {
 
   const originals = origins();
 
-  const parseAll = (testOrSuite: Mocha.Suite | Mocha.Test, res: GrepTagObject[]): GrepTagObject[] => {
+  const parseOwnTags = (testOrSuite: Mocha.Suite | Mocha.Test): GrepTagObject[] => {
     const objTags = (testOrSuite as unknown as TestConfig)._testConfig?.tags;
 
     const tagsArr = objTags ? (typeof objTags === 'string' ? [objTags] : objTags) : [];
@@ -41,7 +41,14 @@ export const registerTags = () => {
     });
 
     const inlineTagsTest = parseInlineTags(testOrSuite.title);
-    res = [...res, ...fromConfig, ...inlineTagsTest];
+
+    return uniqTags([...fromConfig, ...inlineTagsTest]);
+  };
+
+  const parseAll = (testOrSuite: Mocha.Suite | Mocha.Test, res: GrepTagObject[]): GrepTagObject[] => {
+    const allOwnTags = parseOwnTags(testOrSuite);
+
+    res = [...res, ...allOwnTags];
 
     if (testOrSuite.parent) {
       return parseAll(testOrSuite.parent, res);
@@ -74,7 +81,9 @@ export const registerTags = () => {
   const suiteTitleChange = (rootSuite: Mocha.Suite, setting: { showTagsInTitle?: boolean }) => {
     const suiteTags = parseAll(rootSuite, []);
 
-    rootSuite.title = removeTagsFromTitle(rootSuite.title);
+    if (setting.showTagsInTitle !== undefined) {
+      rootSuite.title = removeTagsFromTitle(rootSuite.title);
+    }
 
     if (setting.showTagsInTitle && suiteTags.length > 0) {
       const tagsLine = tagsLineForTitle(suiteTags);
@@ -92,8 +101,8 @@ export const registerTags = () => {
     if (showTagsInTitle() === undefined) {
       return;
     }
-
-    const tagsLine = showTagsInTitle() ? tagsLineForTitle(test.tags) : '';
+    const ownTags = parseOwnTags(test);
+    const tagsLine = showTagsInTitle() ? tagsLineForTitle(ownTags) : '';
     test.title = removeTagsFromTitle(test.title) + tagsLine;
   };
 
