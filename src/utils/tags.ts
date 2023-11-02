@@ -67,9 +67,8 @@ export const parseOneTag = (tg: string): GrepTagObject => {
     reasons.push(
       ...reasonsMatch[1]
         .split(',')
-        .map(p => p.trim())
-        .map(p => p.replace(/^"(.*)"$/, '$1'))
-        .map(p => p.replace(/^'(.*)'$/, '$1'))
+        .map(p => p.replace(/^\s*"(.*)"\s*$/, '$1'))
+        .map(p => p.replace(/^\s*'(.*)'\s*$/, '$1'))
         .map(k => decodeTagInfo(k)),
     );
   }
