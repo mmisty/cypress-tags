@@ -80,6 +80,7 @@ export const registerTags = () => {
    */
   const suiteTitleChange = (rootSuite: Mocha.Suite, setting: { showTagsInTitle?: boolean }) => {
     const suiteTags = parseAll(rootSuite, []);
+    rootSuite.tags = uniqTags([...suiteTags, ...(rootSuite.tags ?? [])]);
 
     if (setting.showTagsInTitle !== undefined) {
       rootSuite.title = removeTagsFromTitle(rootSuite.title);
@@ -125,10 +126,10 @@ export const registerTags = () => {
       suite.eachTest(st => {
         testProcess(st);
       });
-    }
 
-    if (showTagsInTitle() !== undefined) {
-      suiteTitleChange(suite, { showTagsInTitle: showTagsInTitle() });
+      if (showTagsInTitle() !== undefined) {
+        suiteTitleChange(suite, { showTagsInTitle: showTagsInTitle() });
+      }
     }
 
     return suite;

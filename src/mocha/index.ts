@@ -6,6 +6,10 @@ namespace Mocha {
     tags?: GrepTagObject[];
   }
 
+  export interface Suite {
+    tags?: GrepTagObject[];
+  }
+
   export interface Runnable {
     tags?: GrepTagObject[];
   }

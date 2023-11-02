@@ -17,6 +17,9 @@ export default defineConfig({
       toConsole: false,
     },
     video: false,
+    env: {
+      cyTagsShowTagsInTitle: false,
+    },
 
     setupNodeEvents(on, config) {
       setupPlugins(on, config);
