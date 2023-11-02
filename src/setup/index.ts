@@ -82,7 +82,7 @@ export const registerTags = () => {
     const test = (originals.originIt as unknown as (...a: unknown[]) => Mocha.Test)(...args);
 
     // for tests that doesn't have parent suite
-    if (test.parent && test.parent.title === '' && !test.parent?.parent) {
+    if (test.parent && test.parent.title === '' && !test.parent.parent) {
       testProcess(test);
     }
 

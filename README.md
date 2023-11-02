@@ -87,3 +87,11 @@ beforeEach(function() {
 })
 
 ```
+
+## Env
+
+To see tags in test / suite title set env variable `cyTagsShowTagsInTitle` to `true`
+
+If you want to keep titles as is set variable to `undefined`
+
+ - [ ] todo: when var is true show only own tags 
