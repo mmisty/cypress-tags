@@ -18,7 +18,7 @@ export default defineConfig({
     },
     video: false,
     env: {
-      cyTagsShowTagsInTitle: false,
+      cyTagsShowTagsInTitle: undefined,
     },
 
     setupNodeEvents(on, config) {
