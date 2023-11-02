@@ -1,4 +1,4 @@
-import { parseInlineTags, removeTagsFromTitle, uniqTags } from '../utils/tags';
+import { encodeTagInfo, parseInlineTags, removeTagsFromTitle, uniqTags } from '../utils/tags';
 import GrepTagObject = Mocha.GrepTagObject;
 
 export const origins = () => ({
@@ -26,11 +26,20 @@ export const registerTags = () => {
   const parseAll = (testOrSuite: Mocha.Suite | Mocha.Test, res: GrepTagObject[]): GrepTagObject[] => {
     const objTags = (testOrSuite as unknown as TestConfig)._testConfig?.tags;
 
-    const tagsArr = objTags ? (typeof objTags === 'string' ? [objTags] : objTags ?? []) : [];
+    const tagsArr = objTags ? (typeof objTags === 'string' ? [objTags] : objTags) : [];
 
-    const fromConfig = tagsArr.flatMap(t =>
-      typeof t === 'string' ? parseInlineTags(t) : t.tag ? [{ info: [], ...t }] : [{ tag: 'unknown type of tag' }],
-    );
+    const fromConfig = tagsArr.flatMap(t => {
+      if (typeof t === 'string') {
+        return parseInlineTags(t);
+      }
+
+      if (t.tag && typeof t.tag === 'string') {
+        return [{ info: [], ...t }];
+      }
+
+      return [{ tag: 'unknown type of tag' }];
+    });
+
     const inlineTagsTest = parseInlineTags(testOrSuite.title);
     res = [...res, ...fromConfig, ...inlineTagsTest];
 
@@ -42,9 +51,19 @@ export const registerTags = () => {
   };
 
   const tagsLineForTitle = (tags: GrepTagObject[]): string => {
-    const info = (inf: string[] | undefined) => (inf && inf.length > 0 ? `("${inf.join('","')}")` : '');
+    const infoChange = (inf: string[] | undefined): string => (inf && inf.length > 0 ? `("${inf.join('","')}")` : '');
 
-    return tags.map(t => `${t.tag}${info(t.info)}`).join(' ');
+    const encodeWhenSpecialChars = (info: string[] | undefined): string => {
+      return infoChange(
+        info?.map(t => {
+          const pattern = /[$^%@`]/;
+
+          return pattern.test(t) ? encodeTagInfo(t) : t;
+        }),
+      );
+    };
+
+    return tags.map(t => `${t.tag}${encodeWhenSpecialChars(t.info)}`).join(' ');
   };
 
   /**
@@ -68,7 +87,7 @@ export const registerTags = () => {
   };
 
   const testProcess = (test: Mocha.Test) => {
-    test.tags = parseAll(test, []);
+    test.tags = uniqTags([...(test.tags ?? []), ...parseAll(test, [])]);
 
     if (showTagsInTitle() === undefined) {
       return;

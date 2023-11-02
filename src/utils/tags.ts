@@ -5,8 +5,15 @@ const regexDiffQuotes = ['"', "'"].map(t => `(@[^@ ]+\\(${t}[^@${t}]+${t}(?:,\\s
 const tagsRegex = new RegExp(`${regexDiffQuotes.join('|')}|${regexTagsNoReasons}`, 'g');
 
 export const uniqTags = (arr: GrepTagObject[]): GrepTagObject[] => {
+  const stringifyTagObj = (o: GrepTagObject) => {
+    return JSON.stringify({
+      tags: o.tag,
+      info: o.info,
+    });
+  };
+
   return arr.filter((obj, index, self) => {
-    const indexCurrent = self.map(s => JSON.stringify(s)).indexOf(JSON.stringify(obj));
+    const indexCurrent = self.map(s => stringifyTagObj(s)).indexOf(stringifyTagObj(obj));
 
     return indexCurrent === index;
   });
@@ -46,8 +53,8 @@ const encodeDecode = (str: string, isEncode: boolean) => {
   return newStr;
 };
 
-const encodeFailReason = (str: string) => encodeDecode(encodeURIComponent(str), true);
-const decodeFailReason = (str: string) => encodeDecode(decodeURIComponent(str), false);
+export const encodeTagInfo = (str: string) => encodeDecode(encodeURIComponent(str), true);
+export const decodeTagInfo = (str: string) => encodeDecode(decodeURIComponent(str), false);
 
 export const parseOneTag = (tg: string): GrepTagObject => {
   const reasons: string[] = [];
@@ -60,9 +67,10 @@ export const parseOneTag = (tg: string): GrepTagObject => {
     reasons.push(
       ...reasonsMatch[1]
         .split(',')
+        .map(p => p.trim())
         .map(p => p.replace(/^"(.*)"$/, '$1'))
         .map(p => p.replace(/^'(.*)'$/, '$1'))
-        .map(k => decodeFailReason(k)),
+        .map(k => decodeTagInfo(k)),
     );
   }
   const tagMatch = tg.match(regexpTag);
@@ -104,7 +112,7 @@ export const parseTags = (str: string): GrepTagObject[] => {
  * });
  */
 export const tag = (name: string, ...info: string[]): string => {
-  const encodedReasons = info.map(inf => encodeFailReason(inf));
+  const encodedReasons = info.map(inf => encodeTagInfo(inf));
   const reasonsSeparatedByComma = encodedReasons.map(r => `"${r}"`).join(',');
   const reasonsStr = encodedReasons.length > 0 ? `(${reasonsSeparatedByComma})` : '';
 
