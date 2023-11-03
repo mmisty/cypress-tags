@@ -103,7 +103,7 @@ export const registerTags = () => {
       return;
     }
     const ownTags = parseOwnTags(test);
-    const tagsLine = showTagsInTitle() ? tagsLineForTitle(ownTags) : '';
+    const tagsLine = showTagsInTitle() ? ` ${tagsLineForTitle(ownTags)}` : '';
     test.title = removeTagsFromTitle(test.title) + tagsLine;
   };
 

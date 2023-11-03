@@ -8,8 +8,8 @@ registerTags();
 describe('cyTagsShowTagsInTitle true', () => {
   describe('suite with tag @suiteTag', () => {
     it('test @tag', function () {
-      expect(this.test?.title).eq('test@tag');
-      expect(this.test?.fullTitle()).eq('cyTagsShowTagsInTitle true suite with tag @suiteTag test@tag');
+      expect(this.test?.title).eq('test @tag');
+      expect(this.test?.fullTitle()).eq('cyTagsShowTagsInTitle true suite with tag @suiteTag test @tag');
     });
   });
 });
@@ -37,9 +37,9 @@ describe('cyTagsShowTagsInTitle true', () => {
   describe('suite with tag @suiteTag', () => {
     describe('suite with tag @apple', () => {
       it('test @tag', function () {
-        expect(this.test?.title).eq('test@tag');
+        expect(this.test?.title).eq('test @tag');
         expect(this.test?.fullTitle()).eq(
-          'cyTagsShowTagsInTitle true suite with tag @suiteTag suite with tag @apple @suiteTag test@tag',
+          'cyTagsShowTagsInTitle true suite with tag @suiteTag suite with tag @apple @suiteTag test @tag',
         );
       });
     });

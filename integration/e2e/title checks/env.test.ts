@@ -4,7 +4,7 @@ Cypress.env('cyTagsShowTagsInTitle', true);
 registerTags();
 describe('cyTagsShowTagsInTitle  ', () => {
   it('test @tag', function () {
-    expect(this.test?.title).eq('test@tag');
+    expect(this.test?.title).eq('test @tag');
   });
 });
 
@@ -12,7 +12,7 @@ Cypress.env('cyTagsShowTagsInTitle', true);
 registerTags();
 describe('cyTagsShowTagsInTitle true, tags as object', () => {
   it('test', { tags: ['@tag'] }, function () {
-    expect(this.test?.title).eq('test@tag');
+    expect(this.test?.title).eq('test @tag');
   });
 });
 
