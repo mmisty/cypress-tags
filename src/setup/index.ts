@@ -83,12 +83,8 @@ export const registerTags = () => {
     rootSuite.tags = uniqTags([...suiteTags, ...(rootSuite.tags ?? [])]);
 
     if (setting.showTagsInTitle !== undefined) {
-      rootSuite.title = removeTagsFromTitle(rootSuite.title);
-    }
-
-    if (setting.showTagsInTitle && suiteTags.length > 0) {
-      const tagsLine = tagsLineForTitle(suiteTags);
-      rootSuite.title = `${rootSuite.title} ${tagsLine}`;
+      const tagsLine = setting.showTagsInTitle && suiteTags.length > 0 ? ` ${tagsLineForTitle(suiteTags)}` : '';
+      rootSuite.title = `${removeTagsFromTitle(rootSuite.title)}${tagsLine}`;
     }
 
     for (const suite of rootSuite.suites) {
@@ -103,7 +99,7 @@ export const registerTags = () => {
       return;
     }
     const ownTags = parseOwnTags(test);
-    const tagsLine = showTagsInTitle() ? ` ${tagsLineForTitle(ownTags)}` : '';
+    const tagsLine = showTagsInTitle() && ownTags.length > 0 ? ` ${tagsLineForTitle(ownTags)}` : '';
     test.title = removeTagsFromTitle(test.title) + tagsLine;
   };
 
