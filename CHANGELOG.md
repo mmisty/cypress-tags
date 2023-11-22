@@ -1,4 +1,4 @@
 ## Changelog
 
-## <version>
-- changes
+## 1.0.15
+- fix for tags in `.only` tests

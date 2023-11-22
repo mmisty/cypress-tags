@@ -103,33 +103,39 @@ export const registerTags = () => {
     test.title = removeTagsFromTitle(test.title) + tagsLine;
   };
 
-  function itWithTags(...args: unknown[]): Mocha.Test {
-    const test = (originals.originIt as unknown as (...a: unknown[]) => Mocha.Test)(...args);
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  const itWithTagsByOrigin = origin =>
+    function itWithTags(...args: unknown[]): Mocha.Test {
+      const test = origin(...args);
 
-    // for tests that doesn't have parent suite
-    if (test.parent && test.parent.title === '' && !test.parent.parent) {
-      testProcess(test);
-    }
-
-    return test;
-  }
-
-  function describeWithTags(...args: unknown[]): Mocha.Suite {
-    const suite = (originals.originDescribe as unknown as (...a: unknown[]) => Mocha.Suite)(...args);
-
-    // do only for root suite
-    if (suite.parent?.title === '') {
-      suite.eachTest(st => {
-        testProcess(st);
-      });
-
-      if (showTagsInTitle() !== undefined) {
-        suiteTitleChange(suite, { showTagsInTitle: showTagsInTitle() });
+      // for tests that doesn't have parent suite
+      if (test.parent && test.parent.title === '' && !test.parent.parent) {
+        testProcess(test);
       }
-    }
 
-    return suite;
-  }
+      return test;
+    };
+
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  const describeWithTagsByOrig = original =>
+    function describeWithTags(...args: unknown[]): Mocha.Suite {
+      const suite = original(...args);
+
+      // do only for root suite
+      if (suite.parent?.title === '') {
+        suite.eachTest((st: any) => {
+          testProcess(st);
+        });
+
+        if (showTagsInTitle() !== undefined) {
+          suiteTitleChange(suite, { showTagsInTitle: showTagsInTitle() });
+        }
+      }
+
+      return suite;
+    };
 
   const handleRetries = () => {
     const runner = (Cypress as any).mocha.getRunner() as Mocha.Runner;
@@ -159,12 +165,12 @@ export const registerTags = () => {
     it: { only: unknown; skip: unknown };
   };
 
-  (global as GlobalMochaFunc).describe = describeWithTags;
-  (global as GlobalMochaExtensions).describe.only = originals.originOnly;
-  (global as GlobalMochaExtensions).describe.skip = originals.originSkip;
-  (global as GlobalMochaFunc).it = itWithTags;
-  (global as GlobalMochaExtensions).it.only = originals.originItOnly;
-  (global as GlobalMochaExtensions).it.skip = originals.originItSkip;
+  (global as GlobalMochaFunc).describe = describeWithTagsByOrig(originals.originDescribe);
+  (global as GlobalMochaExtensions).describe.only = describeWithTagsByOrig(originals.originOnly);
+  (global as GlobalMochaExtensions).describe.skip = describeWithTagsByOrig(originals.originSkip);
+  (global as GlobalMochaFunc).it = itWithTagsByOrigin(originals.originIt);
+  (global as GlobalMochaExtensions).it.only = itWithTagsByOrigin(originals.originItOnly);
+  (global as GlobalMochaExtensions).it.skip = itWithTagsByOrigin(originals.originItSkip);
 
   handleRetries();
 };
