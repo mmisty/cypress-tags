@@ -41,15 +41,16 @@
     "all": "npm run pre && npm run cov:check && npm run cov",
     "pre": "rm -rf ./node_modules/.cache lib reports coverage-nyc .nyc_output && npm run lint && npm run build:all && npm run test:all && npm run cov:merge",
     "prepublishOnly": "{ echo \"Run script 'npm run publish:pack', 'npm run publish:minor', etc from package.json\n\"; exit 1; }",
-    "postpublish": "git tag v$ver",
     "pack": "npm run build && cp package.json ./lib/package.json && cp README.md ./lib/README.md && cp CHANGELOG.md ./lib/CHANGELOG.md && sh .scripts/remove.sh && cd lib && npm version $ver --no-git-tag-version ",
     "prepublish": "npm run lint",
     "publishPack": "npm run pack && cd lib && npm publish --tag $TAG",
-    "publish:alpha": "export TAG=alpha && export ver=$(semver $(npm show . version) --increment -i prerelease  --preid 'alpha') && npm run publishPack && npm run postpublish",
+    "publish:alpha": "export TAG=alpha && export ver=$(semver $(npm show . version --tag alpha || npm show . version) --increment -i prerelease  --preid 'alpha') && npm run publishPack && npm run postpublish",
+    "publish:alpha:init": "export TAG=alpha && export ver=$(semver $(npm show . version) --increment -i prerelease  --preid 'alpha') && npm run publishPack && npm run postpublish",
     "publish:patch": "export TAG=latest && export ver=$(semver $(npm show . version) --increment -i patch) && npm run publishPack && npm run postpublish",
     "publish:minor": "export TAG=latest && export ver=$(semver $(npm show . version) --increment -i minor) && npm run publishPack && npm run postpublish",
     "publish:major": "export TAG=latest && export ver=$(semver $(npm show . version) --increment -i major) && npm run publishPack && npm run postpublish",
-    "publish:pack": "export TAG=alpha && export ver=\"1.0.3-alpha\" && npm run publishPack && npm run postpublish"
+    "publish:pack": "export TAG=alpha && export ver=\"1.0.3-alpha\" && npm run publishPack && npm run postpublish",
+    "postpublish": "git tag v$ver"
   },
   "jest-junit": {
     "suiteName": "jest tests",
