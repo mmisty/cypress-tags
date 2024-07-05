@@ -110,7 +110,7 @@ export const registerTags = () => {
       const test = origin(...args);
 
       // for tests that doesn't have parent suite
-      if (test.parent && test.parent.title === '' && !test.parent.parent) {
+      if (test && test.parent && test.parent.title === '' && !test.parent.parent) {
         testProcess(test);
       }
 
@@ -124,7 +124,7 @@ export const registerTags = () => {
       const suite = original(...args);
 
       // do only for root suite
-      if (suite.parent?.title === '') {
+      if (suite && suite.parent?.title === '') {
         suite.eachTest((st: any) => {
           testProcess(st);
         });
