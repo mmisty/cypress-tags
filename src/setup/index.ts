@@ -124,7 +124,7 @@ export const registerTags = () => {
       const suite = original(...args);
 
       // do only for root suite
-      if (suite.parent?.title === '') {
+      if (suite && suite.parent?.title === '') {
         suite.eachTest((st: any) => {
           testProcess(st);
         });
