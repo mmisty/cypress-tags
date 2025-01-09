@@ -7,29 +7,29 @@ import { registerTags } from 'cy-local/setup';
 
   describe(`should have proper infos when cyTagsShowTagsInTitle is ${cyTagsShowTagsInTitle}`, () => {
     it('one @tag("info1")', function () {
-      expect(this.test?.tags).to.deep.eq([{ tag: '@tag', info: ['info1'] }]);
+      expect(this.test?.tags).to.deep.eq([{ tag: '@tag', info: ['info1'], isOwnTag: true }]);
     });
 
     it('several @tag("info1","info2")', function () {
-      expect(this.test?.tags).to.deep.eq([{ tag: '@tag', info: ['info1', 'info2'] }]);
+      expect(this.test?.tags).to.deep.eq([{ tag: '@tag', info: ['info1', 'info2'], isOwnTag: true }]);
     });
 
     it('several with spaces @tag("info1 one", "info2 two")', function () {
       console.log(this.test?.tags);
-      expect(this.test?.tags).to.deep.eq([{ tag: '@tag', info: ['info1 one', 'info2 two'] }]);
+      expect(this.test?.tags).to.deep.eq([{ tag: '@tag', info: ['info1 one', 'info2 two'], isOwnTag: true }]);
     });
 
     it('one with spaces @tag("some info with spaces")', function () {
-      expect(this.test?.tags).to.deep.eq([{ tag: '@tag', info: ['some info with spaces'] }]);
+      expect(this.test?.tags).to.deep.eq([{ tag: '@tag', info: ['some info with spaces'], isOwnTag: true }]);
     });
 
     it('one with special symbols', { tags: [{ tag: '@tag', info: ['Special symbol $%^@@$`'] }] }, function () {
       console.log(this.test?.tags);
-      expect(this.test?.tags).to.deep.eq([{ tag: '@tag', info: ['Special symbol $%^@@$`'] }]);
+      expect(this.test?.tags).to.deep.eq([{ tag: '@tag', info: ['Special symbol $%^@@$`'], isOwnTag: true }]);
     });
 
     it(`one with special symbols (helper for title) ${tag('tag', 'Special symbol $%^@@$`')} `, function () {
-      expect(this.test?.tags).to.deep.eq([{ tag: '@tag', info: ['Special symbol $%^@@$`'] }]);
+      expect(this.test?.tags).to.deep.eq([{ tag: '@tag', info: ['Special symbol $%^@@$`'], isOwnTag: true }]);
     });
   });
 });
