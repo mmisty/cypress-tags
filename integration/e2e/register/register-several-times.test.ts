@@ -8,7 +8,7 @@ describe('should have single tag after registering several times @suiteTag', () 
   it('test @tag', function () {
     expect(this.test?.title).eq('test @tag');
     expect(this.test?.tags).deep.eq([
-      { tag: '@tag', info: [] },
+      { tag: '@tag', info: [], isOwnTag: true },
       { tag: '@suiteTag', info: [] },
     ]);
   });
