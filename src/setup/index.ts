@@ -93,15 +93,15 @@ export const registerTags = () => {
   };
 
   const testProcess = (test: Mocha.Test) => {
+    const ownTags = parseOwnTags(test);
     test.tags = uniqTags([...(test.tags ?? []), ...parseAll(test, [])]);
+    test.tags = test.tags.map(x => (ownTags.map(t => t.tag).includes(x.tag) ? { ...x, isOwnTag: true } : x));
 
     if (showTagsInTitle() === undefined) {
       return;
     }
-    const ownTags = parseOwnTags(test);
     const tagsLine = showTagsInTitle() && ownTags.length > 0 ? ` ${tagsLineForTitle(ownTags)}` : '';
     test.title = removeTagsFromTitle(test.title) + tagsLine;
-    test.tags = test.tags.map(x => (ownTags.map(t => t.tag).includes(x.tag) ? { ...x, isOwnTag: true } : x));
   };
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
