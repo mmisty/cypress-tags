@@ -101,6 +101,7 @@ export const registerTags = () => {
     const ownTags = parseOwnTags(test);
     const tagsLine = showTagsInTitle() && ownTags.length > 0 ? ` ${tagsLineForTitle(ownTags)}` : '';
     test.title = removeTagsFromTitle(test.title) + tagsLine;
+    test.tags = test.tags.map(x => (ownTags.map(t => t.tag).includes(x.tag) ? { ...x, isOwnTag: true } : x));
   };
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
