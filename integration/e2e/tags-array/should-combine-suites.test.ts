@@ -3,7 +3,7 @@ describe('parent @tag', () => {
     describe('nested @tag3', () => {
       it('test @test', function () {
         expect(this.test?.tags).deep.eq([
-          { tag: '@test', info: [] },
+          { tag: '@test', info: [], isOwnTag: true },
           { tag: '@tag3', info: [] },
           { tag: '@tag2', info: [] },
           { tag: '@tag', info: [] },

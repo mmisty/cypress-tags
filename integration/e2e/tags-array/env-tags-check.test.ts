@@ -8,7 +8,7 @@ describe('cyTagsShowTagsInTitle is false', () => {
     describe('suite with tag @apple("info")', () => {
       it('test @tag', function () {
         expect(this.test?.tags).deep.eq([
-          { tag: '@tag', info: [] },
+          { tag: '@tag', info: [], isOwnTag: true },
           { tag: '@apple', info: ['info'] },
           { tag: '@suiteTag', info: [] },
         ]);
@@ -24,7 +24,7 @@ describe('cyTagsShowTagsInTitle is true', () => {
     describe('suite with tag @apple("info")', () => {
       it('test @tag', function () {
         expect(this.test?.tags).deep.eq([
-          { tag: '@tag', info: [] },
+          { tag: '@tag', info: [], isOwnTag: true },
           { tag: '@apple', info: ['info'] },
           { tag: '@suiteTag', info: [] },
         ]);
@@ -40,10 +40,11 @@ describe('cyTagsShowTagsInTitle is undefined', () => {
     describe('suite with tag @apple("info")', () => {
       it('test@tag', function () {
         expect(this.test?.tags).deep.eq([
-          { tag: '@tag', info: [] },
+          { tag: '@tag', info: [], isOwnTag: true },
           { tag: '@apple', info: ['info'] },
           { tag: '@suiteTag', info: [] },
         ]);
+        console.log(this.test?.tags);
       });
     });
   });
