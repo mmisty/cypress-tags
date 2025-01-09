@@ -7,7 +7,7 @@ describe('cyTagsShowTagsInTitle', () => {
 
           if (Cypress.env('cyTagsShowTagsInTitle') === 'false' || Cypress.env('cyTagsShowTagsInTitle') === false) {
             expect(this.test?.tags).deep.eq([
-              { tag: '@tag', info: [] },
+              { tag: '@tag', info: [], isOwnTag: true },
               { tag: '@apple', info: [] },
               { tag: '@suiteTag', info: [] },
             ]);
@@ -29,7 +29,7 @@ describe('cyTagsShowTagsInTitle', () => {
 
           if (Cypress.env('cyTagsShowTagsInTitle') === 'true' || Cypress.env('cyTagsShowTagsInTitle') === true) {
             expect(this.test?.tags).deep.eq([
-              { tag: '@tag', info: [] },
+              { tag: '@tag', info: [], isOwnTag: true },
               { tag: '@apple', info: [] },
               { tag: '@suiteTag', info: [] },
             ]);
@@ -52,7 +52,7 @@ describe('cyTagsShowTagsInTitle', () => {
 
           if (Cypress.env('cyTagsShowTagsInTitle') === undefined) {
             expect(this.test?.tags).deep.eq([
-              { tag: '@tag', info: [] },
+              { tag: '@tag', info: [], isOwnTag: true },
               { tag: '@apple', info: [] },
               { tag: '@suiteTag', info: [] },
             ]);
