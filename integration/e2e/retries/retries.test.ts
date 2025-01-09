@@ -14,7 +14,7 @@ describe('retries - should transfer tags to retries @retries', { retries: 1 }, (
     expect(this.test?.title).eq('test @failOnPurpose');
     cy.wrap(null).then(() =>
       expect(this.test?.tags).to.deep.eq([
-        { tag: '@failOnPurpose', info: [] },
+        { tag: '@failOnPurpose', info: [], isOwnTag: true },
         { tag: '@retries', info: [] },
       ]),
     );

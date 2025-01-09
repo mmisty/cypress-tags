@@ -5,6 +5,6 @@ registerTags();
 
 describe('should keep tags in object when inline tags and show tags is false', () => {
   it('one @tag("info1")', function () {
-    expect(this.test?.tags).to.deep.eq([{ tag: '@tag', info: ['info1'] }]);
+    expect(this.test?.tags).to.deep.eq([{ tag: '@tag', info: ['info1'], isOwnTag: true }]);
   });
 });

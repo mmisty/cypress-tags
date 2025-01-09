@@ -93,12 +93,18 @@ export const registerTags = () => {
   };
 
   const testProcess = (test: Mocha.Test) => {
+    const ownTags = parseOwnTags(test);
     test.tags = uniqTags([...(test.tags ?? []), ...parseAll(test, [])]);
+    test.tags = test.tags.map(x =>
+      ownTags.map(t => t.tag).includes(x.tag) &&
+      ownTags.map(t => JSON.stringify(t.info)).includes(JSON.stringify(x.info))
+        ? { ...x, isOwnTag: true }
+        : x,
+    );
 
     if (showTagsInTitle() === undefined) {
       return;
     }
-    const ownTags = parseOwnTags(test);
     const tagsLine = showTagsInTitle() && ownTags.length > 0 ? ` ${tagsLineForTitle(ownTags)}` : '';
     test.title = removeTagsFromTitle(test.title) + tagsLine;
   };
