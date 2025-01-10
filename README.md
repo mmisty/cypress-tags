@@ -9,8 +9,8 @@ Example:
     it('test with tags @test', { tags: ['@abc'] }, function () {
       // this.test?.tags object has all tags
       expect(this.test?.tags).to.deep.eq([
-        { tag: '@abc', info: [] },
-        { tag: '@test', info: [] },
+        { tag: '@abc', info: [], isOwnTag: true },
+        { tag: '@test', info: [], isOwnTag: true },
       ]);
     });
 ```
