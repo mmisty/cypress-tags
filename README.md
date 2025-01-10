@@ -15,6 +15,8 @@ Example:
     });
 ```
 
+- `isOwnTag` indicates whether tag is for test, when it is undefined this means it is set to parent suites of the test
+
 ## Installation / setup
 
 1. install with npm:
