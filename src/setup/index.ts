@@ -16,9 +16,9 @@ type TestConfig = {
 
 export const registerTags = () => {
   const showTagsInTitle = () => {
-    return Cypress.env('cyTagsShowTagsInTitle') !== undefined
-      ? Cypress.env('cyTagsShowTagsInTitle') === 'true' || Cypress.env('cyTagsShowTagsInTitle') === true
-      : undefined;
+    const val = Cypress.expose('cyTagsShowTagsInTitle');
+
+    return val !== undefined ? val === 'true' || val === true : undefined;
   };
 
   const originals = origins();

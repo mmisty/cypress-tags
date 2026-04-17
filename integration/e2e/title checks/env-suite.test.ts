@@ -1,6 +1,6 @@
 import { registerTags } from 'cy-local/setup';
 
-Cypress.env('cyTagsShowTagsInTitle', true);
+Cypress.expose('cyTagsShowTagsInTitle', true);
 registerTags();
 describe('Should have proper suite title when env var is true', () => {
   describe('suite with tag @suiteTag', () => {
@@ -13,7 +13,7 @@ describe('Should have proper suite title when env var is true', () => {
   });
 });
 
-Cypress.env('cyTagsShowTagsInTitle', false);
+Cypress.expose('cyTagsShowTagsInTitle', false);
 registerTags();
 describe('Should have proper suite title when env var is false', () => {
   describe('suite with tag @suiteTag', () => {
@@ -27,7 +27,7 @@ describe('Should have proper suite title when env var is false', () => {
 /**
  * Should have proper suite title when nested suites
  */
-Cypress.env('cyTagsShowTagsInTitle', true);
+Cypress.expose('cyTagsShowTagsInTitle', true);
 registerTags();
 describe('cyTagsShowTagsInTitle true', () => {
   describe('suite with tag @suiteTag', () => {
@@ -45,7 +45,7 @@ describe('cyTagsShowTagsInTitle true', () => {
 /**
  * Should have proper suite title when nested suites and cyTagsShowTagsInTitle false
  */
-Cypress.env('cyTagsShowTagsInTitle', false);
+Cypress.expose('cyTagsShowTagsInTitle', false);
 registerTags();
 describe('cyTagsShowTagsInTitle false', () => {
   describe('suite with tag @suiteTag', () => {

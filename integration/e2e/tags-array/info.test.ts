@@ -2,7 +2,7 @@ import { tag } from 'cy-local/utils/tags';
 import { registerTags } from 'cy-local/setup';
 
 [true, false].forEach(cyTagsShowTagsInTitle => {
-  Cypress.env('cyTagsShowTagsInTitle', cyTagsShowTagsInTitle);
+  Cypress.expose('cyTagsShowTagsInTitle', cyTagsShowTagsInTitle);
   registerTags();
 
   describe(`should have proper infos when cyTagsShowTagsInTitle is ${cyTagsShowTagsInTitle}`, () => {

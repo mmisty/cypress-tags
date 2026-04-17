@@ -4,6 +4,7 @@ import { setupPlugins } from './integration/plugins';
 const cypressFolder = 'integration';
 
 export default defineConfig({
+  allowCypressEnv: false,
   e2e: {
     specPattern: `${cypressFolder}/e2e/**/*.(cy|test|spec).ts`,
     supportFile: `${cypressFolder}/support/index.ts`,
@@ -17,9 +18,7 @@ export default defineConfig({
       toConsole: false,
     },
     video: false,
-    env: {
-      cyTagsShowTagsInTitle: undefined,
-    },
+    expose: {},
 
     setupNodeEvents(on, config) {
       setupPlugins(on, config);

@@ -1,6 +1,6 @@
 import { registerTags } from 'cy-local/setup';
 
-Cypress.env('cyTagsShowTagsInTitle', true);
+Cypress.expose('cyTagsShowTagsInTitle', true);
 registerTags();
 describe('no tags and env var is true - should have the same title as it was', () => {
   it('test', function () {
