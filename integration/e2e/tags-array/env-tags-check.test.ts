@@ -1,6 +1,6 @@
 import { registerTags } from 'cy-local/setup';
 
-Cypress.env('cyTagsShowTagsInTitle', false);
+Cypress.expose('cyTagsShowTagsInTitle', false);
 registerTags();
 
 describe('cyTagsShowTagsInTitle is false', () => {
@@ -17,7 +17,7 @@ describe('cyTagsShowTagsInTitle is false', () => {
   });
 });
 
-Cypress.env('cyTagsShowTagsInTitle', true);
+Cypress.expose('cyTagsShowTagsInTitle', true);
 registerTags();
 describe('cyTagsShowTagsInTitle is true', () => {
   describe('suite with tag @suiteTag', () => {
@@ -33,7 +33,7 @@ describe('cyTagsShowTagsInTitle is true', () => {
   });
 });
 
-Cypress.env('cyTagsShowTagsInTitle', undefined);
+Cypress.expose('cyTagsShowTagsInTitle', undefined);
 registerTags();
 describe('cyTagsShowTagsInTitle is undefined', () => {
   describe('suite with tag @suiteTag', () => {

@@ -1,6 +1,6 @@
 import { registerTags } from 'cy-local/setup';
 
-Cypress.env('cyTagsShowTagsInTitle', false);
+Cypress.expose('cyTagsShowTagsInTitle', false);
 registerTags();
 
 describe('should keep tags in object when inline tags and show tags is false', () => {

@@ -90,10 +90,12 @@ beforeEach(function() {
 
 ```
 
-## Env
+## Configuration (`expose`)
 
-To see tags in test / suite title set env variable `cyTagsShowTagsInTitle` to `true`
+Cypress 15.10+ uses [`expose`](https://docs.cypress.io/app/references/migration-guide#Migrating-away-from-Cypressenv) for public, browser-safe values instead of hydrating everything through `env`.
 
-If you want to keep titles as they are set variable to `undefined`
+To see tags in test / suite title, set `cyTagsShowTagsInTitle` under `e2e.expose` in `cypress.config` (or pass `--expose cyTagsShowTagsInTitle=true`), or call `Cypress.expose('cyTagsShowTagsInTitle', true)` from a support file.
+
+If you want to keep titles as they are, leave the value unset or set it to `undefined`.
 
  - [ ] todo: when var is `true` show only own tags 
