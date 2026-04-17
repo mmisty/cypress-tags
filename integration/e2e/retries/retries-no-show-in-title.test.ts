@@ -3,7 +3,7 @@ import { registerTags } from 'cy-local/setup';
 /**
  * Should have proper tags when retires and do not show tags in title
  */
-Cypress.env('cyTagsShowTagsInTitle', false);
+Cypress.expose('cyTagsShowTagsInTitle', false);
 registerTags();
 describe('retries - should transfer tags to retries @retries', { retries: 1 }, () => {
   afterEach(function () {

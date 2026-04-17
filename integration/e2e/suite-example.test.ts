@@ -3,9 +3,12 @@ describe('cyTagsShowTagsInTitle', () => {
     describe('suite with tag @suiteTag', () => {
       describe('suite with tag @apple', () => {
         it('test @tag', function () {
-          cy.log(`cyTagsShowTagsInTitle ${Cypress.env('cyTagsShowTagsInTitle')}`);
+          cy.log(`cyTagsShowTagsInTitle ${Cypress.expose('cyTagsShowTagsInTitle')}`);
 
-          if (Cypress.env('cyTagsShowTagsInTitle') === 'false' || Cypress.env('cyTagsShowTagsInTitle') === false) {
+          if (
+            Cypress.expose('cyTagsShowTagsInTitle') === 'false' ||
+            Cypress.expose('cyTagsShowTagsInTitle') === false
+          ) {
             expect(this.test?.tags).deep.eq([
               { tag: '@tag', info: [], isOwnTag: true },
               { tag: '@apple', info: [] },
@@ -25,9 +28,9 @@ describe('cyTagsShowTagsInTitle', () => {
     describe('suite with tag @suiteTag', () => {
       describe('suite with tag @apple', () => {
         it('test @tag', function () {
-          cy.log(`cyTagsShowTagsInTitle ${Cypress.env('cyTagsShowTagsInTitle')}`);
+          cy.log(`cyTagsShowTagsInTitle ${Cypress.expose('cyTagsShowTagsInTitle')}`);
 
-          if (Cypress.env('cyTagsShowTagsInTitle') === 'true' || Cypress.env('cyTagsShowTagsInTitle') === true) {
+          if (Cypress.expose('cyTagsShowTagsInTitle') === 'true' || Cypress.expose('cyTagsShowTagsInTitle') === true) {
             expect(this.test?.tags).deep.eq([
               { tag: '@tag', info: [], isOwnTag: true },
               { tag: '@apple', info: [] },
@@ -48,9 +51,9 @@ describe('cyTagsShowTagsInTitle', () => {
     describe('suite with tag @suiteTag', () => {
       describe('suite with tag @apple', () => {
         it('test @tag', function () {
-          cy.log(`cyTagsShowTagsInTitle ${Cypress.env('cyTagsShowTagsInTitle')}`);
+          cy.log(`cyTagsShowTagsInTitle ${Cypress.expose('cyTagsShowTagsInTitle')}`);
 
-          if (Cypress.env('cyTagsShowTagsInTitle') === undefined) {
+          if (Cypress.expose('cyTagsShowTagsInTitle') === undefined) {
             expect(this.test?.tags).deep.eq([
               { tag: '@tag', info: [], isOwnTag: true },
               { tag: '@apple', info: [] },

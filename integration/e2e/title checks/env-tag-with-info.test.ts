@@ -3,7 +3,7 @@ import { registerTags } from 'cy-local/setup';
 /**
  * Should have proper suite/test title when env var is true and tag has info
  */
-Cypress.env('cyTagsShowTagsInTitle', true);
+Cypress.expose('cyTagsShowTagsInTitle', true);
 registerTags();
 describe('cyTagsShowTagsInTitle true', () => {
   describe('suite with tag @suiteTag("info")', () => {

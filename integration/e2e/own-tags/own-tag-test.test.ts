@@ -1,6 +1,6 @@
 import { registerTags } from 'cy-local/setup';
 
-Cypress.env('cyTagsShowTagsInTitle', true);
+Cypress.expose('cyTagsShowTagsInTitle', true);
 registerTags();
 
 describe('own tags', { tags: ['@SMOKE'] }, () => {

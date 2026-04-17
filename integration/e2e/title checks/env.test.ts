@@ -1,6 +1,6 @@
 import { registerTags } from 'cy-local/setup';
 
-Cypress.env('cyTagsShowTagsInTitle', true);
+Cypress.expose('cyTagsShowTagsInTitle', true);
 registerTags();
 describe('cyTagsShowTagsInTitle  ', () => {
   it('test @tag', function () {
@@ -8,7 +8,7 @@ describe('cyTagsShowTagsInTitle  ', () => {
   });
 });
 
-Cypress.env('cyTagsShowTagsInTitle', true);
+Cypress.expose('cyTagsShowTagsInTitle', true);
 registerTags();
 describe('cyTagsShowTagsInTitle true, tags as object', () => {
   it('test', { tags: ['@tag'] }, function () {
@@ -16,7 +16,7 @@ describe('cyTagsShowTagsInTitle true, tags as object', () => {
   });
 });
 
-Cypress.env('cyTagsShowTagsInTitle', false);
+Cypress.expose('cyTagsShowTagsInTitle', false);
 registerTags();
 describe('cyTagsShowTagsInTitle false', () => {
   it('test @tag', function () {
@@ -24,7 +24,7 @@ describe('cyTagsShowTagsInTitle false', () => {
   });
 });
 
-Cypress.env('cyTagsShowTagsInTitle', false);
+Cypress.expose('cyTagsShowTagsInTitle', false);
 registerTags();
 describe('cyTagsShowTagsInTitle false, tags as object', () => {
   it('test', { tags: ['@tag'] }, function () {
@@ -32,7 +32,7 @@ describe('cyTagsShowTagsInTitle false, tags as object', () => {
   });
 });
 
-Cypress.env('cyTagsShowTagsInTitle', undefined);
+Cypress.expose('cyTagsShowTagsInTitle', undefined);
 registerTags();
 describe('cyTagsKeepTitleAsIs true', () => {
   it('test @tag', function () {
@@ -40,7 +40,7 @@ describe('cyTagsKeepTitleAsIs true', () => {
   });
 });
 
-Cypress.env('cyTagsShowTagsInTitle', undefined);
+Cypress.expose('cyTagsShowTagsInTitle', undefined);
 registerTags();
 describe('cyTagsKeepTitleAsIs true', () => {
   it('test', { tags: ['@tag'] }, function () {
