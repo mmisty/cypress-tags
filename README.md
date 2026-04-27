@@ -1,7 +1,7 @@
 # Cypress-tags
 
 This plugin helps to parse tags to add them 
-into Mocha Test object, so you can access
+into a Mocha Test object, so you can access
 tags within hooks and within a test.
 
 Example: 
